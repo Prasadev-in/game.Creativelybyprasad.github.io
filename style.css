@@ -1,1 +1,421 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
 
+html,
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #05060a;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    user-select: none;
+}
+
+body {
+    touch-action: none;
+}
+
+#game {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    position: absolute;
+    inset: 0;
+}
+
+canvas {
+    display: block;
+}
+
+/* =========================
+   HUD
+========================= */
+
+#hud {
+    position: absolute;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.hud-box {
+    min-width: 105px;
+    padding: 10px 16px;
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 12px;
+    background: rgba(5,7,12,0.72);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.hud-label {
+    display: block;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #9da4b5;
+    margin-bottom: 4px;
+}
+
+.hud-box span:last-child {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+/* =========================
+   SPEEDOMETER
+========================= */
+
+#speedometer {
+    position: absolute;
+    right: 35px;
+    bottom: 35px;
+    width: 190px;
+    padding: 16px;
+    border-radius: 18px;
+    background: rgba(5,7,12,0.75);
+    border: 1px solid rgba(255,255,255,0.16);
+    backdrop-filter: blur(12px);
+    text-align: center;
+    z-index: 10;
+}
+
+#speed-number {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 0.9;
+}
+
+.speed-unit {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: #aab0bd;
+    margin-top: 7px;
+}
+
+.speed-bar {
+    width: 100%;
+    height: 5px;
+    margin-top: 14px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#speed-fill {
+    width: 0%;
+    height: 100%;
+    background: #ffffff;
+    transition: width 0.1s linear;
+}
+
+/* =========================
+   NITRO
+========================= */
+
+#nitro-container {
+    position: absolute;
+    left: 35px;
+    bottom: 35px;
+    width: 230px;
+    z-index: 10;
+}
+
+.nitro-title {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.nitro-title span:last-child {
+    color: #62d9ff;
+}
+
+.nitro-bar {
+    width: 100%;
+    height: 9px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+#nitro-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #26bfff, #9df0ff);
+    box-shadow: 0 0 15px rgba(50,210,255,0.7);
+}
+
+/* =========================
+   SCREENS
+========================= */
+
+.screen {
+    position: absolute;
+    inset: 0;
+    z-index: 30;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background:
+        radial-gradient(circle at center,
+        rgba(25,35,60,0.45),
+        rgba(0,0,0,0.82));
+
+    text-align: center;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.title-small {
+    font-size: 12px;
+    letter-spacing: 7px;
+    color: #aeb6c7;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: clamp(60px, 11vw, 130px);
+    line-height: 0.8;
+    font-weight: 950;
+    letter-spacing: -5px;
+}
+
+h1 span {
+    color: #65dfff;
+}
+
+.screen p {
+    margin-top: 25px;
+    font-size: 13px;
+    letter-spacing: 7px;
+    color: #aeb6c7;
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    color: white;
+    font-weight: 800;
+}
+
+#start-button,
+#restart-button {
+    margin-top: 40px;
+    padding: 17px 42px;
+    border-radius: 50px;
+    background: white;
+    color: #05060a;
+    font-size: 14px;
+    letter-spacing: 2px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#start-button:hover,
+#restart-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(255,255,255,0.35);
+}
+
+.controls-info {
+    margin-top: 35px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    color: #737b8c;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.controls-info span {
+    color: white;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* =========================
+   COUNTDOWN
+========================= */
+
+#countdown {
+    position: absolute;
+    inset: 0;
+    z-index: 25;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 130px;
+    font-weight: 950;
+    pointer-events: none;
+
+    text-shadow: 0 0 40px rgba(255,255,255,0.6);
+}
+
+/* =========================
+   FINISH
+========================= */
+
+#finish-title {
+    font-size: clamp(50px, 9vw, 100px);
+    margin-bottom: 40px;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    margin: 8px;
+}
+
+.result span {
+    color: #8991a2;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.result strong {
+    font-size: 30px;
+    margin-top: 4px;
+}
+
+/* =========================
+   MOBILE CONTROLS
+========================= */
+
+#mobile-controls {
+    display: none;
+    position: absolute;
+    inset: auto 0 20px 0;
+    z-index: 20;
+    padding: 0 20px;
+    pointer-events: none;
+}
+
+.steering,
+.pedals {
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    gap: 10px;
+    pointer-events: auto;
+}
+
+.steering {
+    left: 20px;
+}
+
+.pedals {
+    right: 20px;
+}
+
+#mobile-controls button {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(10,12,20,0.75);
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(8px);
+    font-size: 20px;
+}
+
+#nitro-btn {
+    position: absolute;
+    left: 50%;
+    bottom: 15px;
+    transform: translateX(-50%);
+    width: 82px !important;
+    height: 48px !important;
+    border-radius: 15px !important;
+    font-size: 11px !important;
+    letter-spacing: 1px;
+    color: #65dfff !important;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+    #hud {
+        top: 12px;
+        gap: 6px;
+    }
+
+    .hud-box {
+        min-width: 75px;
+        padding: 7px 8px;
+    }
+
+    .hud-label {
+        font-size: 7px;
+    }
+
+    .hud-box span:last-child {
+        font-size: 15px;
+    }
+
+    #speedometer {
+        right: 15px;
+        bottom: 105px;
+        width: 125px;
+        padding: 10px;
+        border-radius: 14px;
+    }
+
+    #speed-number {
+        font-size: 35px;
+    }
+
+    .speed-unit {
+        font-size: 8px;
+    }
+
+    #nitro-container {
+        left: 15px;
+        bottom: 110px;
+        width: 145px;
+    }
+
+    .controls-info {
+        display: none;
+    }
+
+    #mobile-controls {
+        display: block;
+    }
+
+    h1 {
+        font-size: 62px;
+    }
+
+    .screen p {
+        font-size: 9px;
+        letter-spacing: 4px;
+    }
+
+    #countdown {
+        font-size: 90px;
+    }
+}
