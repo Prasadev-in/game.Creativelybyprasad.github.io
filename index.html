@@ -1,1 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
+    <title>Project 4 · 3D Racing</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Three.js -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+</head>
+
+<body>
+
+    <div id="game">
+
+        <!-- 3D GAME -->
+        <div id="game-container"></div>
+
+        <!-- TOP HUD -->
+        <div id="hud">
+
+            <div class="hud-box position-box">
+                <span class="hud-label">POSITION</span>
+                <span id="position">1 / 4</span>
+            </div>
+
+            <div class="hud-box lap-box">
+                <span class="hud-label">LAP</span>
+                <span id="lap">1 / 3</span>
+            </div>
+
+            <div class="hud-box timer-box">
+                <span class="hud-label">TIME</span>
+                <span id="timer">00:00.000</span>
+            </div>
+
+        </div>
+
+        <!-- SPEED -->
+        <div id="speedometer">
+            <div id="speed-number">0</div>
+            <div class="speed-unit">KM/H</div>
+
+            <div class="speed-bar">
+                <div id="speed-fill"></div>
+            </div>
+        </div>
+
+        <!-- NITRO -->
+        <div id="nitro-container">
+            <div class="nitro-title">
+                <span>NITRO</span>
+                <span id="nitro-percent">100%</span>
+            </div>
+
+            <div class="nitro-bar">
+                <div id="nitro-fill"></div>
+            </div>
+        </div>
+
+        <!-- COUNTDOWN -->
+        <div id="countdown"></div>
+
+        <!-- START SCREEN -->
+        <div id="start-screen" class="screen">
+
+            <div class="title-small">PROJECT 4</div>
+
+            <h1>NEON<br><span>CIRCUIT</span></h1>
+
+            <p>3D STREET RACING</p>
+
+            <button id="start-button">START RACE</button>
+
+            <div class="controls-info">
+                <span>↑ / W</span> ACCELERATE
+                <span>↓ / S</span> BRAKE
+                <span>← → / A D</span> STEER
+                <span>SPACE</span> NITRO
+            </div>
+
+        </div>
+
+        <!-- FINISH SCREEN -->
+        <div id="finish-screen" class="screen hidden">
+
+            <div class="title-small">RACE COMPLETE</div>
+
+            <h2 id="finish-title">FINISH!</h2>
+
+            <div class="result">
+                <span>POSITION</span>
+                <strong id="final-position">1ST</strong>
+            </div>
+
+            <div class="result">
+                <span>TIME</span>
+                <strong id="final-time">00:00.000</strong>
+            </div>
+
+            <button id="restart-button">RACE AGAIN</button>
+
+        </div>
+
+        <!-- MOBILE CONTROLS -->
+        <div id="mobile-controls">
+
+            <div class="steering">
+                <button id="left-btn">◀</button>
+                <button id="right-btn">▶</button>
+            </div>
+
+            <div class="pedals">
+                <button id="brake-btn">▼</button>
+                <button id="accelerate-btn">▲</button>
+            </div>
+
+            <button id="nitro-btn">NITRO</button>
+
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
