@@ -1,8 +1,12 @@
+/* =========================================================
+   PROJECT 4 — NEON CIRCUIT
+   3D RACING GAME
+========================================================= */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
 }
 
 html,
@@ -10,412 +14,772 @@ body {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background: #05060a;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
-    user-select: none;
 }
 
 body {
+    background: #05070b;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
     touch-action: none;
 }
 
+/* =========================================================
+   GAME
+========================================================= */
+
 #game {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
+    background: #05070b;
 }
 
 #game-container {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 }
 
-canvas {
+#game-container canvas {
     display: block;
+    width: 100%;
+    height: 100%;
 }
 
-/* =========================
+/* =========================================================
    HUD
-========================= */
+========================================================= */
 
 #hud {
     position: absolute;
-    top: 25px;
+    top: 22px;
     left: 50%;
     transform: translateX(-50%);
+
     display: flex;
-    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
     z-index: 10;
     pointer-events: none;
 }
 
 .hud-box {
     min-width: 105px;
-    padding: 10px 16px;
-    border: 1px solid rgba(255,255,255,0.18);
-    border-radius: 12px;
-    background: rgba(5,7,12,0.72);
-    backdrop-filter: blur(10px);
+    padding: 11px 18px;
+
     text-align: center;
+
+    background: rgba(8, 11, 18, 0.78);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.25);
 }
 
 .hud-label {
     display: block;
+
+    margin-bottom: 5px;
+
+    color: #8993a6;
     font-size: 9px;
+    font-weight: 700;
     letter-spacing: 2px;
-    color: #9da4b5;
-    margin-bottom: 4px;
 }
 
 .hud-box span:last-child {
-    font-size: 20px;
-    font-weight: 800;
+    display: block;
+
+    color: #ffffff;
+    font-size: 19px;
+    font-weight: 900;
 }
 
-/* =========================
+/* =========================================================
    SPEEDOMETER
-========================= */
+========================================================= */
 
 #speedometer {
     position: absolute;
-    right: 35px;
-    bottom: 35px;
+
+    right: 30px;
+    bottom: 30px;
+
     width: 190px;
     padding: 16px;
-    border-radius: 18px;
-    background: rgba(5,7,12,0.75);
-    border: 1px solid rgba(255,255,255,0.16);
-    backdrop-filter: blur(12px);
-    text-align: center;
+
     z-index: 10;
+
+    text-align: center;
+
+    background: rgba(7, 10, 17, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.35);
 }
 
 #speed-number {
-    font-size: 52px;
-    font-weight: 900;
+    color: #ffffff;
+
+    font-size: 54px;
     line-height: 0.9;
+    font-weight: 900;
+    letter-spacing: -3px;
 }
 
 .speed-unit {
-    font-size: 10px;
-    letter-spacing: 3px;
-    color: #aab0bd;
-    margin-top: 7px;
+    margin-top: 8px;
+
+    color: #7e8798;
+
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 4px;
 }
 
 .speed-bar {
     width: 100%;
     height: 5px;
-    margin-top: 14px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 10px;
+
+    margin-top: 15px;
+
     overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
 }
 
 #speed-fill {
     width: 0%;
     height: 100%;
+
     background: #ffffff;
-    transition: width 0.1s linear;
+
+    border-radius: inherit;
+
+    box-shadow:
+        0 0 12px rgba(255, 255, 255, 0.7);
+
+    transition: width 0.08s linear;
 }
 
-/* =========================
+/* =========================================================
    NITRO
-========================= */
+========================================================= */
 
 #nitro-container {
     position: absolute;
-    left: 35px;
+
+    left: 30px;
     bottom: 35px;
+
     width: 230px;
+
     z-index: 10;
 }
 
 .nitro-title {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+
     margin-bottom: 8px;
-    font-size: 11px;
-    font-weight: bold;
+
+    color: #ffffff;
+
+    font-size: 10px;
+    font-weight: 800;
     letter-spacing: 2px;
 }
 
-.nitro-title span:last-child {
-    color: #62d9ff;
+#nitro-percent {
+    color: #55dfff;
 }
 
 .nitro-bar {
     width: 100%;
     height: 9px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 20px;
+
     overflow: hidden;
+
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-radius: 20px;
 }
 
 #nitro-fill {
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, #26bfff, #9df0ff);
-    box-shadow: 0 0 15px rgba(50,210,255,0.7);
+
+    background: linear-gradient(
+        90deg,
+        #008cff,
+        #45dfff,
+        #b4f6ff
+    );
+
+    border-radius: inherit;
+
+    box-shadow:
+        0 0 18px rgba(50, 210, 255, 0.8);
+
+    transition: width 0.1s linear;
 }
 
-/* =========================
-   SCREENS
-========================= */
+/* =========================================================
+   COUNTDOWN
+========================================================= */
+
+#countdown {
+    position: absolute;
+    inset: 0;
+
+    z-index: 25;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #ffffff;
+
+    font-size: clamp(80px, 14vw, 150px);
+    font-weight: 950;
+    letter-spacing: -8px;
+
+    text-shadow:
+        0 0 20px rgba(255, 255, 255, 0.4),
+        0 0 70px rgba(70, 210, 255, 0.4);
+
+    pointer-events: none;
+}
+
+/* =========================================================
+   FULL SCREEN MENUS
+========================================================= */
 
 .screen {
     position: absolute;
     inset: 0;
+
     z-index: 30;
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-
-    background:
-        radial-gradient(circle at center,
-        rgba(25,35,60,0.45),
-        rgba(0,0,0,0.82));
+    justify-content: center;
 
     text-align: center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(19, 40, 65, 0.48) 0%,
+            rgba(4, 7, 12, 0.75) 45%,
+            rgba(2, 3, 6, 0.95) 100%
+        );
+
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
 }
 
 .hidden {
     display: none !important;
 }
 
+/* =========================================================
+   TITLE
+========================================================= */
+
 .title-small {
-    font-size: 12px;
+    margin-bottom: 22px;
+
+    color: #8f9aad;
+
+    font-size: 11px;
+    font-weight: 800;
     letter-spacing: 7px;
-    color: #aeb6c7;
-    margin-bottom: 20px;
 }
 
 h1 {
-    font-size: clamp(60px, 11vw, 130px);
-    line-height: 0.8;
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(65px, 11vw, 135px);
+    line-height: 0.78;
     font-weight: 950;
-    letter-spacing: -5px;
+
+    letter-spacing: -7px;
+
+    text-shadow:
+        0 10px 50px rgba(0, 0, 0, 0.5);
 }
 
 h1 span {
-    color: #65dfff;
+    color: #5de1ff;
+
+    text-shadow:
+        0 0 25px rgba(60, 220, 255, 0.5);
 }
 
 .screen p {
-    margin-top: 25px;
-    font-size: 13px;
+    margin-top: 27px;
+
+    color: #8791a2;
+
+    font-size: 11px;
+    font-weight: 700;
     letter-spacing: 7px;
-    color: #aeb6c7;
 }
 
-button {
-    border: none;
-    cursor: pointer;
-    color: white;
-    font-weight: 800;
-}
+/* =========================================================
+   MAIN BUTTONS
+========================================================= */
 
 #start-button,
 #restart-button {
-    margin-top: 40px;
-    padding: 17px 42px;
+    margin-top: 42px;
+
+    padding: 16px 38px;
+
+    border: none;
     border-radius: 50px;
-    background: white;
-    color: #05060a;
-    font-size: 14px;
+
+    background: #ffffff;
+    color: #05070b;
+
+    font-size: 12px;
+    font-weight: 900;
     letter-spacing: 2px;
-    transition: transform 0.2s, box-shadow 0.2s;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.4);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
 }
 
 #start-button:hover,
 #restart-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 35px rgba(255,255,255,0.35);
+    transform: translateY(-3px) scale(1.03);
+
+    box-shadow:
+        0 15px 45px rgba(255, 255, 255, 0.2);
 }
 
+#start-button:active,
+#restart-button:active {
+    transform: scale(0.97);
+}
+
+/* =========================================================
+   KEYBOARD CONTROLS INFO
+========================================================= */
+
 .controls-info {
-    margin-top: 35px;
     display: flex;
-    gap: 12px;
     align-items: center;
-    color: #737b8c;
-    font-size: 9px;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 32px;
+
+    color: #687284;
+
+    font-size: 8px;
+    font-weight: 700;
     letter-spacing: 1px;
 }
 
 .controls-info span {
-    color: white;
-    font-weight: bold;
     margin-left: 10px;
+
+    padding: 6px 8px;
+
+    color: #dce3ed;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+
+    font-size: 8px;
 }
 
-/* =========================
-   COUNTDOWN
-========================= */
-
-#countdown {
-    position: absolute;
-    inset: 0;
-    z-index: 25;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 130px;
-    font-weight: 950;
-    pointer-events: none;
-
-    text-shadow: 0 0 40px rgba(255,255,255,0.6);
-}
-
-/* =========================
-   FINISH
-========================= */
+/* =========================================================
+   FINISH SCREEN
+========================================================= */
 
 #finish-title {
-    font-size: clamp(50px, 9vw, 100px);
-    margin-bottom: 40px;
+    margin-bottom: 35px;
+
+    color: #ffffff;
+
+    font-size: clamp(55px, 9vw, 110px);
+    font-weight: 950;
+
+    letter-spacing: -5px;
 }
 
 .result {
     display: flex;
     flex-direction: column;
-    margin: 8px;
+
+    align-items: center;
+
+    margin: 6px 0;
 }
 
 .result span {
-    color: #8991a2;
-    font-size: 10px;
+    color: #7c8698;
+
+    font-size: 9px;
+    font-weight: 700;
     letter-spacing: 3px;
 }
 
 .result strong {
-    font-size: 30px;
     margin-top: 4px;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 900;
 }
 
-/* =========================
+/* =========================================================
    MOBILE CONTROLS
-========================= */
+========================================================= */
 
 #mobile-controls {
     display: none;
+
     position: absolute;
-    inset: auto 0 20px 0;
+
+    left: 0;
+    right: 0;
+    bottom: 18px;
+
+    height: 100px;
+
     z-index: 20;
-    padding: 0 20px;
+
     pointer-events: none;
+}
+
+#mobile-controls button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 62px;
+    height: 62px;
+
+    padding: 0;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+
+    background: rgba(7, 10, 17, 0.78);
+    color: #ffffff;
+
+    font-size: 20px;
+    font-weight: 900;
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.35);
+
+    pointer-events: auto;
+
+    touch-action: none;
+}
+
+#mobile-controls button:active {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(0.94);
 }
 
 .steering,
 .pedals {
     position: absolute;
+
     bottom: 0;
+
     display: flex;
     gap: 10px;
-    pointer-events: auto;
+
+    pointer-events: none;
 }
 
 .steering {
-    left: 20px;
+    left: 18px;
 }
 
 .pedals {
-    right: 20px;
+    right: 18px;
 }
 
-#mobile-controls button {
-    width: 64px;
-    height: 64px;
-    border-radius: 50%;
-    background: rgba(10,12,20,0.75);
-    border: 1px solid rgba(255,255,255,0.2);
-    backdrop-filter: blur(8px);
-    font-size: 20px;
+.steering button,
+.pedals button {
+    pointer-events: auto;
 }
+
+/* =========================================================
+   NITRO MOBILE BUTTON
+========================================================= */
 
 #nitro-btn {
     position: absolute;
+
     left: 50%;
-    bottom: 15px;
+    bottom: 8px;
+
     transform: translateX(-50%);
+
     width: 82px !important;
-    height: 48px !important;
-    border-radius: 15px !important;
-    font-size: 11px !important;
-    letter-spacing: 1px;
-    color: #65dfff !important;
+    height: 45px !important;
+
+    border-radius: 14px !important;
+
+    color: #5de1ff !important;
+
+    font-size: 9px !important;
+    letter-spacing: 2px;
 }
 
-/* =========================
+#nitro-btn:active {
+    transform: translateX(-50%) scale(0.94);
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+    #hud {
+        top: 16px;
+    }
+
+    .hud-box {
+        min-width: 90px;
+        padding: 9px 13px;
+    }
+
+    #speedometer {
+        right: 20px;
+        bottom: 25px;
+    }
+
+    #nitro-container {
+        left: 20px;
+        bottom: 30px;
+    }
+}
+
+/* =========================================================
    MOBILE
-========================= */
+========================================================= */
 
 @media (max-width: 700px) {
 
     #hud {
-        top: 12px;
-        gap: 6px;
+        top: 10px;
+
+        gap: 5px;
+
+        width: 100%;
     }
 
     .hud-box {
-        min-width: 75px;
+        min-width: 72px;
+
         padding: 7px 8px;
+
+        border-radius: 9px;
     }
 
     .hud-label {
+        margin-bottom: 3px;
+
         font-size: 7px;
+        letter-spacing: 1px;
     }
 
     .hud-box span:last-child {
-        font-size: 15px;
+        font-size: 14px;
     }
 
+
+    /* SPEED */
+
     #speedometer {
-        right: 15px;
-        bottom: 105px;
+        right: 14px;
+        bottom: 110px;
+
         width: 125px;
+
         padding: 10px;
-        border-radius: 14px;
+
+        border-radius: 13px;
     }
 
     #speed-number {
-        font-size: 35px;
+        font-size: 36px;
+        letter-spacing: -2px;
     }
 
     .speed-unit {
+        margin-top: 6px;
+
+        font-size: 7px;
+        letter-spacing: 3px;
+    }
+
+    .speed-bar {
+        margin-top: 10px;
+        height: 4px;
+    }
+
+
+    /* NITRO */
+
+    #nitro-container {
+        left: 14px;
+        bottom: 112px;
+
+        width: 145px;
+    }
+
+    .nitro-title {
         font-size: 8px;
     }
 
-    #nitro-container {
-        left: 15px;
-        bottom: 110px;
-        width: 145px;
+    .nitro-bar {
+        height: 7px;
+    }
+
+
+    /* MOBILE CONTROLS */
+
+    #mobile-controls {
+        display: block;
+    }
+
+
+    /* MENU */
+
+    .title-small {
+        margin-bottom: 16px;
+
+        font-size: 8px;
+        letter-spacing: 5px;
+    }
+
+    h1 {
+        font-size: 62px;
+        letter-spacing: -4px;
+    }
+
+    .screen p {
+        margin-top: 20px;
+
+        font-size: 8px;
+        letter-spacing: 4px;
+    }
+
+    #start-button,
+    #restart-button {
+        margin-top: 32px;
+
+        padding: 14px 30px;
+
+        font-size: 10px;
     }
 
     .controls-info {
         display: none;
     }
 
-    #mobile-controls {
-        display: block;
-    }
 
-    h1 {
-        font-size: 62px;
-    }
-
-    .screen p {
-        font-size: 9px;
-        letter-spacing: 4px;
-    }
+    /* COUNTDOWN */
 
     #countdown {
         font-size: 90px;
+    }
+
+
+    /* FINISH */
+
+    #finish-title {
+        font-size: 58px;
+    }
+
+    .result strong {
+        font-size: 25px;
+    }
+}
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .hud-box {
+        min-width: 65px;
+        padding: 6px;
+    }
+
+    .hud-box span:last-child {
+        font-size: 13px;
+    }
+
+    #speedometer {
+        width: 110px;
+        bottom: 108px;
+    }
+
+    #speed-number {
+        font-size: 32px;
+    }
+
+    #nitro-container {
+        width: 130px;
+    }
+
+    #mobile-controls button {
+        width: 56px;
+        height: 56px;
+    }
+
+    h1 {
+        font-size: 52px;
     }
 }
