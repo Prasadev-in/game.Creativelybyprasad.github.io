@@ -1,130 +1,331 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <title>Project 4 · 3D Racing</title>
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>Project 4 · Neon Circuit</title>
 
     <link rel="stylesheet" href="style.css">
 
-    <!-- Three.js -->
+    <!-- THREE.JS -->
     <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+
 </head>
+
 
 <body>
 
-    <div id="game">
+<div id="game">
 
-        <!-- 3D GAME -->
-        <div id="game-container"></div>
 
-        <!-- TOP HUD -->
-        <div id="hud">
+    <!-- =====================================================
+         3D GAME
+    ====================================================== -->
 
-            <div class="hud-box position-box">
-                <span class="hud-label">POSITION</span>
-                <span id="position">1 / 4</span>
-            </div>
+    <div id="game-container"></div>
 
-            <div class="hud-box lap-box">
-                <span class="hud-label">LAP</span>
-                <span id="lap">1 / 3</span>
-            </div>
 
-            <div class="hud-box timer-box">
-                <span class="hud-label">TIME</span>
-                <span id="timer">00:00.000</span>
-            </div>
+    <!-- =====================================================
+         HUD
+    ====================================================== -->
 
-        </div>
+    <div id="hud">
 
-        <!-- SPEED -->
-        <div id="speedometer">
-            <div id="speed-number">0</div>
-            <div class="speed-unit">KM/H</div>
+        <div class="hud-box position-box">
 
-            <div class="speed-bar">
-                <div id="speed-fill"></div>
-            </div>
-        </div>
+            <span class="hud-label">
+                POSITION
+            </span>
 
-        <!-- NITRO -->
-        <div id="nitro-container">
-            <div class="nitro-title">
-                <span>NITRO</span>
-                <span id="nitro-percent">100%</span>
-            </div>
-
-            <div class="nitro-bar">
-                <div id="nitro-fill"></div>
-            </div>
-        </div>
-
-        <!-- COUNTDOWN -->
-        <div id="countdown"></div>
-
-        <!-- START SCREEN -->
-        <div id="start-screen" class="screen">
-
-            <div class="title-small">PROJECT 4</div>
-
-            <h1>NEON<br><span>CIRCUIT</span></h1>
-
-            <p>3D STREET RACING</p>
-
-            <button id="start-button">START RACE</button>
-
-            <div class="controls-info">
-                <span>↑ / W</span> ACCELERATE
-                <span>↓ / S</span> BRAKE
-                <span>← → / A D</span> STEER
-                <span>SPACE</span> NITRO
-            </div>
+            <span id="position">
+                1 / 4
+            </span>
 
         </div>
 
-        <!-- FINISH SCREEN -->
-        <div id="finish-screen" class="screen hidden">
 
-            <div class="title-small">RACE COMPLETE</div>
+        <div class="hud-box lap-box">
 
-            <h2 id="finish-title">FINISH!</h2>
+            <span class="hud-label">
+                LAP
+            </span>
 
-            <div class="result">
-                <span>POSITION</span>
-                <strong id="final-position">1ST</strong>
-            </div>
-
-            <div class="result">
-                <span>TIME</span>
-                <strong id="final-time">00:00.000</strong>
-            </div>
-
-            <button id="restart-button">RACE AGAIN</button>
+            <span id="lap">
+                1 / 3
+            </span>
 
         </div>
 
-        <!-- MOBILE CONTROLS -->
-        <div id="mobile-controls">
 
-            <div class="steering">
-                <button id="left-btn">◀</button>
-                <button id="right-btn">▶</button>
-            </div>
+        <div class="hud-box timer-box">
 
-            <div class="pedals">
-                <button id="brake-btn">▼</button>
-                <button id="accelerate-btn">▲</button>
-            </div>
+            <span class="hud-label">
+                TIME
+            </span>
 
-            <button id="nitro-btn">NITRO</button>
+            <span id="timer">
+                00:00.000
+            </span>
 
         </div>
 
     </div>
 
-    <script src="script.js"></script>
+
+    <!-- =====================================================
+         SPEEDOMETER
+    ====================================================== -->
+
+    <div id="speedometer">
+
+        <div id="speed-number">
+            0
+        </div>
+
+        <div class="speed-unit">
+            KM/H
+        </div>
+
+        <div class="speed-bar">
+
+            <div id="speed-fill"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         NITRO
+    ====================================================== -->
+
+    <div id="nitro-container">
+
+        <div class="nitro-title">
+
+            <span>
+                NITRO
+            </span>
+
+            <span id="nitro-percent">
+                100%
+            </span>
+
+        </div>
+
+
+        <div class="nitro-bar">
+
+            <div id="nitro-fill"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         COUNTDOWN
+    ====================================================== -->
+
+    <div id="countdown"></div>
+
+
+    <!-- =====================================================
+         START SCREEN
+    ====================================================== -->
+
+    <div
+        id="start-screen"
+        class="screen"
+    >
+
+        <div class="title-small">
+            PROJECT 4
+        </div>
+
+
+        <h1>
+            NEON
+            <br>
+            <span>CIRCUIT</span>
+        </h1>
+
+
+        <p>
+            3D STREET RACING
+        </p>
+
+
+        <button id="start-button">
+            START RACE
+        </button>
+
+
+        <!-- KEYBOARD CONTROLS -->
+
+        <div class="controls-info">
+
+            <div>
+                <strong>W / ↑</strong>
+                <span>ACCELERATE</span>
+            </div>
+
+            <div>
+                <strong>S / ↓</strong>
+                <span>BRAKE</span>
+            </div>
+
+            <div>
+                <strong>A / ←</strong>
+                <span>LEFT</span>
+            </div>
+
+            <div>
+                <strong>D / →</strong>
+                <span>RIGHT</span>
+            </div>
+
+            <div>
+                <strong>SPACE</strong>
+                <span>NITRO</span>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FINISH SCREEN
+    ====================================================== -->
+
+    <div
+        id="finish-screen"
+        class="screen hidden"
+    >
+
+        <div class="title-small">
+            RACE COMPLETE
+        </div>
+
+
+        <h2 id="finish-title">
+            FINISH!
+        </h2>
+
+
+        <div class="result">
+
+            <span>
+                POSITION
+            </span>
+
+            <strong id="final-position">
+                1ST
+            </strong>
+
+        </div>
+
+
+        <div class="result">
+
+            <span>
+                TIME
+            </span>
+
+            <strong id="final-time">
+                00:00.000
+            </strong>
+
+        </div>
+
+
+        <button id="restart-button">
+            RACE AGAIN
+        </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         MOBILE CONTROLS
+    ====================================================== -->
+
+    <div id="mobile-controls">
+
+
+        <!-- STEERING -->
+
+        <div class="steering">
+
+            <button
+                id="left-btn"
+                type="button"
+            >
+                ◀
+            </button>
+
+
+            <button
+                id="right-btn"
+                type="button"
+            >
+                ▶
+            </button>
+
+        </div>
+
+
+        <!-- PEDALS -->
+
+        <div class="pedals">
+
+            <button
+                id="brake-btn"
+                type="button"
+            >
+                ▼
+            </button>
+
+
+            <button
+                id="accelerate-btn"
+                type="button"
+            >
+                ▲
+            </button>
+
+        </div>
+
+
+        <!-- NITRO -->
+
+        <button
+            id="nitro-btn"
+            type="button"
+        >
+            NITRO
+        </button>
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     GAME SCRIPT
+========================================================== -->
+
+<script src="script.js"></script>
 
 </body>
+
 </html>
